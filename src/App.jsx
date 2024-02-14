@@ -33,23 +33,23 @@ export default function Page() {
     <div className="-mt-16 flex h-screen flex-col items-center justify-center">
       {yesPressed ? (
         <>
-          <img className="h-[300px]" src="src/yes.gif" />
+          <img className="h-[300px]" src="yes.gif" />
           <div className="my-4 text-4xl font-bold">УРАААААА!!! Я ЛЮБЛЮ ТЕБЕ!! ;))</div>
         </>
       ) : (
-          <>
-            {noCount > 0 ? (
+        <>
+          {noCount > 0 ? (
 
-              <img
-                className="h-[350px]"
-                  src="src/no.gif"
-              />
-            ) : (
-                <img
-                  className="h-[300px]"
-                  src="src/start.gif"
-                />
-            )}
+            <img
+              className="h-[350px]"
+              src="no.gif"
+            />
+          ) : (
+            <img
+              className="h-[300px]"
+              src="start.gif"
+            />
+          )}
           <h1 className="my-4 text-4xl">Будеш моєю валентинкою?</h1>
           <div className="flex items-center">
             <button
