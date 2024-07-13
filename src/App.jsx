@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
 
+// Spinner component
+const Spinner = ({ text }) => (
+  <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-50 text-white z-50">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white mb-4"></div>
+      <p>{text}</p>
+    </div>
+  </div>
+);
+
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
@@ -8,16 +18,24 @@ export default function Page() {
     no: "no.gif",
     yes: "yes.gif"
   });
-
+  const [loading, setLoading] = useState(true);
   const yesButtonSize = noCount * 20 + 16;
 
   // Preload images
   useEffect(() => {
     const preloadImages = () => {
       const imageKeys = Object.keys(images);
+      let loadedCount = 0;
+
       imageKeys.forEach((key) => {
         const img = new Image();
         img.src = images[key];
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === imageKeys.length) {
+            setLoading(false);
+          }
+        };
       });
     };
 
@@ -45,6 +63,10 @@ export default function Page() {
 
     return phrases[Math.min(noCount, phrases.length - 1)];
   };
+
+  if (loading) {
+    return <Spinner text="Загружаю твою валентинку 🎀" />;
+  }
 
   return (
     <div className="-mt-16 flex h-screen flex-col items-center justify-center">
